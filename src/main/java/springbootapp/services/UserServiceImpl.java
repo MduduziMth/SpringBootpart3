@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
 
     }
     @Override
-    @Cacheable("name")
+    @Cacheable("User")
     public String getUser(long Id){
         fakeRepo = new FakeRepo();
         user = fakeRepo.findUserById(Id);

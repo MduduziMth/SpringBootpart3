@@ -18,10 +18,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class UserServiceImplTest {
 
 
+    @LocalServerPort
+    private int port;
+
     UserServiceImpl userService = new UserServiceImpl();
 
     @Autowired
     private TestRestTemplate template ;
+
+    private URL base;
+
+    @BeforeEach
+    public void urlLink()throws Exception{
+        this.base=new URL("http://localhost:"+port);
+    }
 
 
     @Test
@@ -45,17 +55,20 @@ class UserServiceImplTest {
     void getUserTest()
     {
         userService.addUser(1,"Putin","Vladmir");
-        userService.getUser(1);
-        userService.getUser(1);
-        userService.getUser(1);
-        userService.getUser(1);
+
+        String name = "";
+        for (int i = 0; i < 3; i++) {
+
+            name += "\n" + userService.getUser(1);
+
+        }
 
 
     }
 
     @Test
-    void WebConfigTest(){
-        ResponseEntity<String> response = template.withBasicAuth("Mdu","Secret@123").getForEntity("/user",String.class);
+    void WebConfigTest() throws Exception{
+        ResponseEntity<String> response = template.withBasicAuth("Mdu","Secret@123").getForEntity(base.toString(),String.class);
 
     }
 }
