@@ -16,11 +16,6 @@ public class Application {
 
         SpringApplication.run(Application.class, args);
 
-        service.addUser(1,"Mdu","Mthethwa");
-
-        for (int i = 0; 3>= i ;i++){
-            System.out.println((service.getUser(1)));
-        }
 
     }
 }
